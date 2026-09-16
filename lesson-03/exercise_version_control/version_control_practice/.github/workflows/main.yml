@@ -1,0 +1,37 @@
+name: Check if user pushed to Repo successfully
+
+on: push
+
+jobs:
+  check-file-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: ${{ github.event_name == 'pull_request' && 3 || 0 }}
+      - name: Get changed files
+        id: changed-files
+        run: |
+            if ${{ github.event_name == 'pull_request' }}; then
+                echo "changed_files=$(git diff --name-only -r HEAD^1 HEAD | xargs)" >> $GITHUB_OUTPUT
+            else
+                echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
+            fi
+      - name: Check if README.md was changed
+        run: |
+            isReadmeChanged=0
+            for file in ${{ steps.changed-files.outputs.changed_files }}; do
+                echo "$file was changed"
+                if [[ $file == "README.md" ]]; then
+                    echo "README.md was changed"
+                    isReadmeChanged=1
+                fi
+            done
+            if [[ $isReadmeChanged == 1 ]]; then
+                echo "README.md was changed"
+                exit 0
+            else
+                echo "README.md was not changed"
+                exit 1
+            fi
