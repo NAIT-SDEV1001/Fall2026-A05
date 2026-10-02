@@ -1,0 +1,1 @@
+print("Calculating squares for the following range")
