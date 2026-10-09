@@ -7,13 +7,23 @@ while True:
     if user_input == 'quit': # quit if the user enters 'quit'
         break
     else: # add the score to the total and increment the count
-        total_score += int(user_input)
-        count += 1
+        try:
+            total_score += int(user_input)
+            count += 1
+        except ValueError as error_message:
+            print(f"Could not convert {user_input} to a number. ({error_message})")
+
 
 # only calculate the average if we have at least one score
 
-if count > 0:
+# if count > 0:
+#     average = total_score / count
+#     print(f"Your average golf score is {average}.")
+# else:
+#     print("No scores entered.")
+
+try:
     average = total_score / count
     print(f"Your average golf score is {average}.")
-else:
-    print("No scores entered.")
+except ZeroDivisionError:
+    print("You didn't enter any scores!")
