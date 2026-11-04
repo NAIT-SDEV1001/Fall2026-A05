@@ -64,5 +64,4 @@ print(trainer)
 # bulbasaur.cry()
 # squirtle.cry()
 # charmander.cry()
-
 # print(bulbasaur)
