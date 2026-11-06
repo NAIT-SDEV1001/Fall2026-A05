@@ -1,12 +1,12 @@
-from animals import Animal, Dog#, Cat, Bird
+from animals import Animal, Dog, Cat, Bird
 
 def main() -> None:
     dog = Dog("Ranger", "Brown", 4, "Labrador")
-    # cat = Cat("Soul Destroyer", "Black", 4, "Tabby", 25)
-    # bird = Bird("Furbird", "Green", 2, 40.0)
 
-    #animals = [dog, cat, bird]
-    animals = [dog]
+    cat = Cat("Soul Destroyer", "Black", 4, "Tabby", 25)
+    bird = Bird("Furbird", "Green", 2, 40.0)
+
+    animals: list[Animal] = [dog, cat, bird]
 
     for animal in animals:
         print("-----------------")
@@ -19,8 +19,8 @@ def main() -> None:
         if isinstance(animal, Dog):
             animal.chase_car()
         
-        # if isinstance(animal, Cat):
-        #     animal.knock_stuff()
+        if isinstance(animal, Cat):
+            animal.knock_stuff()
 
         print("-----------------")
 
