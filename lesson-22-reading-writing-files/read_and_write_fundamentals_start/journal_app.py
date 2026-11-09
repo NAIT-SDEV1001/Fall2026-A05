@@ -1,6 +1,10 @@
 # Journal Application
 from pathlib import Path
 
+BASE_DIR = Path(__file__).parent.parent
+CATALOG_CSV = BASE_DIR / "catalog.csv"
+HISTORY_CSV = BASE_DIR / "watch_history.csv"
+
 JOURNAL_FILENAME = "journal.txt"
 
 def read_journal(file_path):
@@ -27,7 +31,7 @@ def print_journal(file_path):
         print(entry)
 
 def main():
-    file_path = Path(__file__).parent / JOURNAL_FILENAME
+    file_path = Path(__file__).parent / "journal.txt"
     print(file_path)
     while True:
         new_entry = input("Write your new entry (or q to quit):").lower()
